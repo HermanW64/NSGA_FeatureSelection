@@ -5,10 +5,7 @@ from NSGA.TerminationCriteria import termination_criteria
 import matplotlib.pyplot as plt
 
 
-def Run_Optimization():
-    problem = MyProblem(xl=[-2, -2], xu=[2, 2])
-    algorithm = NSGA2()
-    termination = termination_criteria(100)
+def Run_Optimization(problem=None, algorithm=None, termination=None):
 
     res = minimize(problem,
                    algorithm,

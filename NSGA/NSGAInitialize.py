@@ -11,11 +11,16 @@ n_offsprings: # of offsprings
 crossover: 
 mutation:
 """
-algorithm = NSGA2(
-    pop_size=100,
-    n_offsprings=100,
-    sampling=FloatRandomSampling(),
-    crossover=SBX(prob=0.9, eta=15),
-    mutation=PM(prob=0.01, eta=20),
-    eliminate_duplicates=True
-)
+
+
+def set_NSGA():
+    algorithm = NSGA2(
+        pop_size=100,
+        n_offsprings=100,
+        sampling=FloatRandomSampling(),
+        crossover=SBX(prob=0.9, eta=15),
+        mutation=PM(prob=0.01, eta=20),
+        eliminate_duplicates=True
+    )
+
+    return algorithm
