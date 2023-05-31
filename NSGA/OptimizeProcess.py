@@ -1,7 +1,7 @@
 from pymoo.optimize import minimize
-from ProblemDefine import MyProblem
-from NSGAInitialize import NSGA2
-from TerminationCriteria import termination_criteria
+from NSGA.ProblemDefine import MyProblem
+from NSGA.NSGAInitialize import NSGA2
+from NSGA.TerminationCriteria import termination_criteria
 import matplotlib.pyplot as plt
 
 
