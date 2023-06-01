@@ -1,0 +1,8 @@
+fHV data for 15 runs: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+average HV for each run: 0.0
+MCE on training set for 15 runs: [0.0417, 0.0347, 0.0417, 0.0625, 0.0486, 0.0208, 0.0486, 0.0486, 0.0417, 0.0417, 0.0417, 0.0417, 0.0417, 0.0417, 0.0486]
+The lowest MCE on training set for 15 runs: 0.0208
+best solution: [0 0 1 0 0 0 0 1 1 1 1 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0 0 0 0 0 1 0 0 1 0 0
+ 0 1 1 1 1 0 0 1 0 0 1 0 0 1 0 0 0 0 0 0 0 0 0]
+the number of selected features: 18
+MCE on test data: 0.2698

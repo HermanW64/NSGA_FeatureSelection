@@ -18,7 +18,7 @@ def Run_Optimization(problem=None, algorithm=None, termination=None, total_num_f
                    # test_label=test_label,
                    # seed=1,
                    save_history=True,
-                   verbose=True)
+                   verbose=False)
 
     # logging.info("optimization ends ...")
 
