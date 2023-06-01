@@ -54,6 +54,7 @@ algorithm = NSGA2(
 termination = get_termination("n_gen", 500)
 
 # 4. optimization process
+print("start optimization process ...")
 res = minimize(problem,
                algorithm,
                termination,
@@ -61,9 +62,12 @@ res = minimize(problem,
                save_history=True,
                verbose=False)
 
+print("optimization ends ...")
 X = res.X
 # res.F size is always equal to the population size
 F = res.F
+
+# 5. visualize the initial and final pareto fronts
 # length of history list is equal to number of the generation
 # get the objectives f1 and f2 of the first and last generation
 initial_gen_F = res.history[0].pop.get("F")
@@ -89,11 +93,23 @@ plt.ylabel("objective 2")
 plt.savefig("./pareto_images/final_pareto.png")
 print("last pareto front plotted!")
 
-# calculate HV
+# 6. calculate HV
 ref_point = np.array([0, 0])
 
 # get all points of the best pareto front in the last generation
 ind = HV(ref_point=ref_point)
 print("HV: ", ind(initial_gen_F))
+
+# 7. record the best solutions and minimum classification error
+# -- find out the lowest F1 error from the result F
+min_f1_index = np.argmin(F[:, 0])
+min_f1 = np.round(F[min_f1_index, 0],3)
+
+# -- find out the corresponding solution in X
+min_solution = np.round(X[min_f1_index, :], 3)
+print("min f1 value: ", min_f1)
+print("corresponding solution: ", min_solution)
+# print("res X: \n", np.round(X, 3))
+
 
 

@@ -35,8 +35,8 @@ def data_preparation(data_file=None):
         logging.info("Unnecessary columns dropped!")
 
     # 2. Show the first few lines with column titles
-    logging.info("cleaned data: ")
-    logging.info(valid_data.head(3))
+    # logging.info("cleaned data: ")
+    # logging.info(valid_data.head(3))
 
     # 5. Split the data into X and Y
     X = valid_data.iloc[:, :-1]  # Input features (all columns except the last one)
@@ -44,6 +44,7 @@ def data_preparation(data_file=None):
 
     # Get the number of features
     num_features = X.shape[1]
+    logging.info("number of features in the dataset: " + str(num_features))
 
     # Generate a vector of ones with the same length as the number of features
     feature_selection = np.ones(num_features)
@@ -54,8 +55,8 @@ def data_preparation(data_file=None):
     else:
         # Split the data into training set (70%) and test set (30%)
         X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.3, random_state=42)
-        logging.info("Data split completed!\n")
+        logging.info("Data split completed! And data is prepared! \n")
 
-    return X_train, X_test, Y_train, Y_test, feature_selection
+    return X_train, X_test, Y_train, Y_test, num_features
 
 
