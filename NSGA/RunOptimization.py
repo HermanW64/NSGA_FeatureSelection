@@ -5,14 +5,15 @@ from problem defining to visualization
 from NSGA.ProblemDefine import MyProblem
 from NSGA.TerminationCriteria import termination_criteria
 from NSGA.NSGAInitialize import set_NSGA
-from NSGA.OptimizeProcess import Run_Optimization
+from NSGA.OptimizeProcess import optimize
 from NSGA.EvaluateSolution import EvaluateSolution
 import logging
 
 logging.basicConfig(level="INFO")
 
 
-def run_optimization(num_features=None, X_train=None, Y_train=None, X_test=None, Y_test=None):
+def run_optimization(num_features=None, X_train=None, Y_train=None,
+                     X_test=None, Y_test=None, plot_name=None, verbose=False):
     """
     :param num_features:
     :param X_train:
@@ -42,12 +43,14 @@ def run_optimization(num_features=None, X_train=None, Y_train=None, X_test=None,
     while run_time <= 15:
         logging.info("\n----the run {0} begins----".format(run_time))
 
-        min_mce_train, min_mce_solution_binary, hv_value = Run_Optimization(problem=problem,
-                                                                            termination=termination,
-                                                                            algorithm=algorithm,
-                                                                            total_num_features=num_features,
-                                                                            run_time=run_time,
-                                                                            )
+        min_mce_train, min_mce_solution_binary, hv_value = optimize(problem=problem,
+                                                                    termination=termination,
+                                                                    algorithm=algorithm,
+                                                                    total_num_features=num_features,
+                                                                    run_time=run_time,
+                                                                    plot_name=plot_name,
+                                                                    verbose=verbose
+                                                                    )
 
         # record the data
         min_mce_train_list.append(min_mce_train)

@@ -27,13 +27,14 @@ def summary(min_mce_train_list=None, hv_list=None, clf_error_test=None,
     mce_training_set_line = "MCE on training set for 15 runs: " + str(min_mce_train_list)
     mce_training_set_line_lowest = "The lowest MCE on training set for 15 runs: " + str(best_mce_train)
 
-    best_solution_line = "best solution: " + str(best_solution)
+    best_solution_line = "best solution: \n" + str(best_solution)
     num_best_features_line = "the number of selected features: " + str(np.sum(best_solution))
     clf_error_test_set_line = "MCE on test data: " + str(clf_error_test)
 
     data_write = hv_data + "\n" + hv_line + "\n" + mce_training_set_line + "\n" \
                  + mce_training_set_line_lowest + "\n" + best_solution_line + "\n" \
                  + num_best_features_line + "\n" + clf_error_test_set_line
+
     with open("./summary_data/summary_" + str(file_name) + ".txt", "w") as file:
         file.write(data_write)
 

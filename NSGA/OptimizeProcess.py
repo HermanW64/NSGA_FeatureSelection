@@ -7,7 +7,8 @@ import logging
 logging.basicConfig(level="INFO")
 
 
-def Run_Optimization(problem=None, algorithm=None, termination=None, total_num_features=None, run_time=None):
+def optimize(problem=None, algorithm=None, termination=None, total_num_features=None,
+             run_time=None, plot_name=None, verbose=False):
 
     # 1. run the predefined problem
     # logging.info("optimization begins ...")
@@ -18,7 +19,7 @@ def Run_Optimization(problem=None, algorithm=None, termination=None, total_num_f
                    # test_label=test_label,
                    # seed=1,
                    save_history=True,
-                   verbose=False)
+                   verbose=verbose)
 
     # logging.info("optimization ends ...")
 
@@ -32,23 +33,23 @@ def Run_Optimization(problem=None, algorithm=None, termination=None, total_num_f
         # show pareto front in the end
         plt.figure(figsize=(7, 5))
         plt.scatter(initial_gen_F[:, 0], initial_gen_F[:, 1], s=30, facecolors='none', edgecolors='blue')
-        plt.title("Initial Pareto Front on training set")
+        plt.title("Initial Pareto Front on training set --" + str(plot_name))
         plt.xlabel("classification error")
         plt.xlim(0, 1)
         plt.ylabel("total number of features")
         plt.ylim(0, total_num_features)
-        plt.savefig("./pareto_images/clf_initial_pareto.png")
+        plt.savefig("./pareto_images/clf_initial_pareto_" + str(plot_name) + ".png")
         logging.info("initial pareto front plotted!")
 
         # show pareto front in the end
         plt.figure(figsize=(7, 5))
         plt.scatter(last_gen_F[:, 0], last_gen_F[:, 1], s=30, facecolors='none', edgecolors='blue')
-        plt.title("Final Pareto Front on training set")
+        plt.title("Final Pareto Front on training set --" + str(plot_name))
         plt.xlabel("classification error")
         plt.xlim(0, 1)
         plt.ylabel("total number of features")
         plt.ylim(0, total_num_features)
-        plt.savefig("./pareto_images/clf_final_pareto.png")
+        plt.savefig("./pareto_images/clf_final_pareto_" + str(plot_name) + ".png")
         logging.info("last pareto front plotted!")
 
     # 3. calculate HV
