@@ -34,6 +34,14 @@ def data_preparation(data_file=None):
         valid_data = valid_data.drop(valid_data.columns[:3], axis=1)
         logging.info("Unnecessary columns dropped!")
 
+    elif data_file == "arrhythmia.data":
+
+        # Identify columns with "?" values
+        columns_with_question_marks = valid_data.columns[valid_data.isin(["?"]).any()]
+
+        # Remove columns with "?" values
+        valid_data = valid_data.drop(columns_with_question_marks, axis=1)
+
     # 2. Show the first few lines with column titles
     # logging.info("cleaned data: ")
     # logging.info(valid_data.head(3))
@@ -54,9 +62,16 @@ def data_preparation(data_file=None):
         logging.info("Insufficient data for splitting.")
     else:
         # Split the data into training set (70%) and test set (30%)
-        X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.3, random_state=42)
+        X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=42)
+        X_train, X_valid, Y_train, Y_valid = train_test_split(X_train, Y_train, test_size=0.25, random_state=42)
+        logging.info("size of X_train: " + str(X_train.shape))
+        logging.info("size of Y_train: " + str(Y_train.shape))
+        logging.info("size of X_valid: " + str(X_valid.shape))
+        logging.info("size of Y_valid: " + str(Y_valid.shape))
+        logging.info("size of X_test: " + str(X_test.shape))
+        logging.info("size of Y_test: " + str(Y_test.shape))
         logging.info("Data split completed! And data is prepared! \n")
 
-    return X_train, X_test, Y_train, Y_test, num_features
+    return X_train, X_test, X_valid, Y_train, Y_valid, Y_test, num_features
 
 

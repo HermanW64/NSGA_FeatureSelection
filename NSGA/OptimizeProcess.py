@@ -29,7 +29,7 @@ def optimize(problem=None, algorithm=None, termination=None, total_num_features=
     last_gen_F = res.history[-1].pop.get("F")
 
     # -- visualization (only plot for one run)
-    if run_time == 15:
+    if run_time == 1:
         # show pareto front in the end
         plt.figure(figsize=(7, 5))
         plt.scatter(initial_gen_F[:, 0], initial_gen_F[:, 1], s=30, facecolors='none', edgecolors='blue')
@@ -53,7 +53,10 @@ def optimize(problem=None, algorithm=None, termination=None, total_num_features=
         logging.info("last pareto front plotted!")
 
     # 3. calculate HV
-    ref_point = np.array([0, 0])
+    # reference point should be the worst point among the population (1, total number of features)
+    worst_obj1 = np.max(initial_gen_F[:, 0]).copy()
+    worst_obj2 = np.max(initial_gen_F[:, 1]).copy()
+    ref_point = np.array([worst_obj1, worst_obj2])
 
     # get all points of the best pareto front in the last generation
     ind = HV(ref_point=ref_point)
@@ -67,16 +70,16 @@ def optimize(problem=None, algorithm=None, termination=None, total_num_features=
 
     # -- find out the lowest classification error from the result
     min_mce_index = np.argmin(F[:, 0])
-    min_mce_train = F[min_mce_index, 0]
+    min_mce_valid = F[min_mce_index, 0]
 
     # -- find out the corresponding feature selection
     min_mce_solution = X[min_mce_index, :]
     min_mce_solution_binary = np.where(min_mce_solution > 0.5, 1, 0)
-    logging.info("minimum classification error on training set: " + str(min_mce_train))
+    logging.info("minimum classification error on validation set: " + str(min_mce_valid))
     logging.info("number of the corresponding selected features: " + str(sum(min_mce_solution_binary)))
     logging.info("the corresponding best solution: \n" + str(min_mce_solution_binary))
 
-    return min_mce_train, min_mce_solution_binary, hv_value
+    return min_mce_valid, min_mce_solution_binary, hv_value
 
 
 

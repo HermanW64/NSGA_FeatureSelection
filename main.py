@@ -1,5 +1,5 @@
-from NSGA.RunOnSonar import run_on_sonar
-from NSGA.RunOnMusk import run_on_musk
+from execution.RunOnSonar import run_on_sonar
+from execution.RunOnArrhythmia import run_on_arrhythmia
 import logging
 logging.basicConfig(level="INFO")
 
@@ -7,4 +7,5 @@ logging.basicConfig(level="INFO")
 if __name__ == '__main__':
 
     # run_on_sonar()
-    run_on_musk()
+    run_on_arrhythmia()
+

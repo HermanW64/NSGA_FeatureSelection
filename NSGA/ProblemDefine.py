@@ -15,7 +15,8 @@ class MyProblem(ElementwiseProblem):
     x2: classification error with selected features 0 to 100
     """
 
-    def __init__(self, number_features=None, X_train=None, Y_train=None):
+    def __init__(self, number_features=None, X_train=None, Y_train=None,
+                 X_valid=None, Y_valid=None):
 
         super().__init__(n_var=number_features,
                          n_obj=2,
@@ -26,6 +27,8 @@ class MyProblem(ElementwiseProblem):
 
         self.X_train = X_train.copy()
         self.Y_train = Y_train.copy()
+        self.X_valid = X_valid.copy()
+        self.Y_valid = Y_valid.copy()
 
     def _evaluate(self, x, out, *args, **kwargs):
         # logging.info("problem defining starts ...")
@@ -47,7 +50,9 @@ class MyProblem(ElementwiseProblem):
 
         # generate the dataset with selected features
         X_train_selected = self.X_train.loc[:, selected_features]
+        X_valid_selected = self.X_valid.loc[:, selected_features]
         Y_train = self.Y_train
+        Y_valid = self.Y_valid
 
         # calculate classification score on the X_train_selected
         k = 5
@@ -55,8 +60,8 @@ class MyProblem(ElementwiseProblem):
         knn.fit(X_train_selected, Y_train)
 
         # show the classification error
-        Y_pred = knn.predict(X_train_selected)
-        classification_error = 1 - accuracy_score(self.Y_train, Y_pred)
+        Y_pred = knn.predict(X_valid_selected)
+        classification_error = 1 - accuracy_score(Y_valid, Y_pred)
 
         f1 = classification_error
 

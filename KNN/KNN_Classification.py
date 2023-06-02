@@ -8,7 +8,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score
 
 
-def train_KNN(X_train=None, Y_train=None):
+def train_KNN(X_train=None, Y_train=None, X_test=None, Y_test=None):
     """
     :param X_train: all features data on training set in pandas format
     :param Y_train: the class label on training set in pandas format
@@ -21,6 +21,10 @@ def train_KNN(X_train=None, Y_train=None):
     # Subset the dataset with selected features
     # X_train_selected = X_train.loc[:, selected_features]
     # logging.info("feature selected!")
+    logging.info("size of X_train: " + str(X_train.shape))
+    logging.info("size of Y_train: " + str(Y_train.shape))
+    logging.info("size of X_test: " + str(X_test.shape))
+    logging.info("size of Y_test: " + str(X_test.shape))
 
     # 2. Train a KNN classifier with k = 5
     k = 5
@@ -28,7 +32,10 @@ def train_KNN(X_train=None, Y_train=None):
     knn.fit(X_train, Y_train)
 
     # 3. Show the classification error
-    Y_pred = knn.predict(X_train)
-    classification_error = 1 - accuracy_score(Y_train, Y_pred)
+    Y_pred = knn.predict(X_test)
+    logging.info("size of Y_pred: " + str(Y_pred.shape))
+    classification_error = round((1 - accuracy_score(Y_test, Y_pred)), 4)
 
-    logging.info("KNN Classification error on training set with all features: {:.4f}\n".format(classification_error))
+    logging.info("KNN Classification error on test set with all features: {:.4f}\n".format(classification_error))
+
+    return classification_error

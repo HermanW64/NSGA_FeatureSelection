@@ -12,8 +12,9 @@ import logging
 logging.basicConfig(level="INFO")
 
 
-def run_optimization(num_features=None, X_train=None, Y_train=None,
-                     X_test=None, Y_test=None, plot_name=None, verbose=False):
+def run_15times(num_features=None, X_train=None, Y_train=None,
+                X_valid=None, Y_valid=None, X_test=None,
+                Y_test=None, plot_name=None, verbose=False):
     """
     :param num_features:
     :param X_train:
@@ -24,13 +25,15 @@ def run_optimization(num_features=None, X_train=None, Y_train=None,
     """
 
     # prepare container to record important data in each run (totally 15)
-    min_mce_train_list = []
+    min_mce_valid_list = []
     min_mce_solution_binary_list = []
     hv_list = []
     clf_error_test_list = []
 
     # 1. problem define:
-    problem = MyProblem(number_features=num_features, X_train=X_train, Y_train=Y_train)
+    problem = MyProblem(number_features=num_features,
+                        X_train=X_train, Y_train=Y_train,
+                        X_valid=X_valid, Y_valid=Y_valid)
 
     # 2. termination criteria
     termination = termination_criteria(max_gen=100)
@@ -43,7 +46,7 @@ def run_optimization(num_features=None, X_train=None, Y_train=None,
     while run_time <= 15:
         logging.info("\n----the run {0} begins----".format(run_time))
 
-        min_mce_train, min_mce_solution_binary, hv_value = optimize(problem=problem,
+        min_mce_valid, min_mce_solution_binary, hv_value = optimize(problem=problem,
                                                                     termination=termination,
                                                                     algorithm=algorithm,
                                                                     total_num_features=num_features,
@@ -53,20 +56,20 @@ def run_optimization(num_features=None, X_train=None, Y_train=None,
                                                                     )
 
         # record the data
-        min_mce_train_list.append(min_mce_train)
+        min_mce_valid_list.append(min_mce_valid)
         min_mce_solution_binary_list.append(min_mce_solution_binary)
         hv_list.append(hv_value)
 
         run_time += 1
 
     # after 15 runs, get the lowest MCE from min_mce_train
-    best_index = min_mce_train_list.index(min(min_mce_train_list))
-    best_mce_train = min_mce_train_list[best_index]
+    best_index = min_mce_valid_list.index(min(min_mce_valid_list))
+    best_mce_train = min_mce_valid_list[best_index]
     best_solution = min_mce_solution_binary_list[best_index]
 
     clf_error_test = EvaluateSolution(X_train=X_train, Y_train=Y_train,
                                       X_test=X_test, Y_test=Y_test,
                                       best_selection=best_solution)
 
-    return min_mce_train_list, min_mce_solution_binary_list, hv_list, \
+    return min_mce_valid_list, min_mce_solution_binary_list, hv_list, \
         clf_error_test, best_solution, best_mce_train
