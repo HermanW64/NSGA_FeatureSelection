@@ -1,10 +1,10 @@
-HV data for 15 runs: [2.6429, 3.9524, 4.4048, 4.5238, 3.4762, 3.8571, 3.7381, 4.0952, 4.5476, 4.7857, 4.0238, 3.5952, 3.5, 3.0, 3.7619]
-average HV for each run: 3.860313333333333
-MCE on training set for 15 runs: [0.2143, 0.1667, 0.2381, 0.1667, 0.1905, 0.1905, 0.2143, 0.2143, 0.2381, 0.2381, 0.2143, 0.1667, 0.2381, 0.2381, 0.2381]
-The lowest MCE on training set for 15 runs: 0.1667
+HV data for 15 runs: [9.6667, 5.381, 6.0, 7.1429, 8.1905, 7.0476, 8.4762, 7.0476, 7.0, 8.1905, 7.5714, 6.381, 6.3333, 6.7619, 9.4762]
+average HV for each run: 7.377786666666666
+MCE on validation set for 15 runs: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+The lowest MCE on validation set for 15 runs: 0.0
 best solution: 
-[0 0 0 0 0 0 0 0 0 0 1 1 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 1 0 0 0 0 0 1 0 0
+[0 0 0 0 0 0 0 0 1 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
-the number of selected features: 6
-MCE on test data with selected features: 0.6429
-classification error on test data with all features: 0.4762
+the number of selected features: 3
+MCE on test data with selected features: 0.3175
+classification error on test data with all features: 0.381

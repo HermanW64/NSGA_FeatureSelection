@@ -24,7 +24,7 @@ def train_KNN(X_train=None, Y_train=None, X_test=None, Y_test=None):
     logging.info("size of X_train: " + str(X_train.shape))
     logging.info("size of Y_train: " + str(Y_train.shape))
     logging.info("size of X_test: " + str(X_test.shape))
-    logging.info("size of Y_test: " + str(X_test.shape))
+    logging.info("size of Y_test: " + str(Y_test.shape))
 
     # 2. Train a KNN classifier with k = 5
     k = 5

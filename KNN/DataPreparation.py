@@ -62,8 +62,8 @@ def data_preparation(data_file=None):
         logging.info("Insufficient data for splitting.")
     else:
         # Split the data into training set (70%) and test set (30%)
-        X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=42)
-        X_train, X_valid, Y_train, Y_valid = train_test_split(X_train, Y_train, test_size=0.25, random_state=42)
+        X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.3, random_state=42)
+        X_train, X_valid, Y_train, Y_valid = train_test_split(X_train, Y_train, test_size=0.1429, random_state=42)
         logging.info("size of X_train: " + str(X_train.shape))
         logging.info("size of Y_train: " + str(Y_train.shape))
         logging.info("size of X_valid: " + str(X_valid.shape))

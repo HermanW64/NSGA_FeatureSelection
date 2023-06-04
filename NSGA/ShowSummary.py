@@ -12,11 +12,11 @@ def summary(min_mce_valid_list=None, hv_list=None, clf_error_test=None,
 
     # 1. display summary data
     logging.info("\n =====Summary of 15 Runs=====")
-    logging.info("MCE on training set: \n" + str(np.min(min_mce_valid_list)))
+    logging.info("MCE on validation set: \n" + str(np.min(min_mce_valid_list)))
     # logging.info("lowest MCE error on training set:\n" + str(best_mce_train) + "\n")
     logging.info("average HV for each run: " + str(np.average(hv_list)))
 
-    logging.info("MCE on validation set: " + str(clf_error_test))
+    logging.info("MCE on the test set: " + str(clf_error_test))
     logging.info("the corresponding best solution: \n" + str(best_solution))
     logging.info("the number of the selected features: " + str(np.sum(best_solution)))
 
