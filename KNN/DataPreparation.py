@@ -72,6 +72,6 @@ def data_preparation(data_file=None):
         logging.info("size of Y_test: " + str(Y_test.shape))
         logging.info("Data split completed! And data is prepared! \n")
 
-    return X_train, X_test, X_valid, Y_train, Y_valid, Y_test, num_features
+    return X_train, X_valid, X_test, Y_train, Y_valid, Y_test, num_features
 
 

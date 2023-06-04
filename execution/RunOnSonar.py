@@ -11,7 +11,7 @@ from NSGA.ShowSummary import summary
 def run_on_sonar():
 
     # I. ML part in the beginning
-    X_train, X_test, X_valid, Y_train, Y_valid, Y_test, num_features = data_preparation(data_file="sonar.data")
+    X_train, X_valid, X_test, Y_train, Y_valid, Y_test, num_features = data_preparation(data_file="sonar.data")
     clf_error_test_allFeatures= train_KNN(X_train=X_train, Y_train=Y_train, X_test=X_test, Y_test=Y_test)
 
     # II. Run Optimization
